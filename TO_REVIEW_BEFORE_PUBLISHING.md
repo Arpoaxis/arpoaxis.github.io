@@ -2,7 +2,8 @@
 
 ## High priority
 
-- [ ] Compare the solar case study with the final project report, current README and experiment outputs; insert verified PR-AUC, TSS, Brier score and calibration tables/figures where appropriate.
+- [x] Add verified PR-AUC, TSS, and Brier test metrics to the solar case study, with plots generated from the repository's published result CSVs.
+- [ ] Compare portfolio interpretations and any future calibration figures against the final capstone report and original experiment outputs.
 - [ ] Add real screenshots and/or a short recorded demo for the Java restaurant site; distinguish **team contributions** from **your personal work**.
 - [ ] Obtain permission from relevant teammates / course owners before publishing shared source, screenshots, or proprietary material. Remove any credentials, student records, real reservation/customer data, private PDFs or secrets.
 - [ ] Validate the source links after deployment and add any eligible restaurant source URL.
