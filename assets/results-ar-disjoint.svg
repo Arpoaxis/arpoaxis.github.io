@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="506" viewBox="0 0 1080 506" role="img" aria-labelledby="chart-title chart-desc">
+<title id="chart-title">Active-region-disjoint: selected model test PR-AUC</title>
+<desc id="chart-desc">Horizontal bars for five selected model configurations. Higher is better. Highest result: 0.6379. Results from the published solar-flare-pred test summary CSV.</desc>
+<rect width="1080" height="506" rx="14" fill="#f5fafb"/>
+<text x="40" y="49" fill="#123747" font-family="Arial,Helvetica,sans-serif" font-weight="750" font-size="26">Active-region-disjoint — test PR-AUC</text>
+<text x="40" y="83" fill="#546e7b" font-family="Arial,Helvetica,sans-serif" font-size="16">Five selected capstone model configurations · Higher is better · 0–1 scale</text>
+<g font-family="Arial,Helvetica,sans-serif"><line x1="430" y1="122" x2="430" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="430" y="459" text-anchor="middle" fill="#546a77" font-size="14">0</text><line x1="565" y1="122" x2="565" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="565" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.25</text><line x1="700" y1="122" x2="700" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="700" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.5</text><line x1="835" y1="122" x2="835" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="835" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.75</text><line x1="970" y1="122" x2="970" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="970" y="459" text-anchor="middle" fill="#546a77" font-size="14">1</text><text x="40" y="166" fill="#263d4d" font-size="17" font-weight="550">CNN · last timestep</text>
+<rect x="430" y="147" width="540" height="29" rx="6" fill="#e9f1f4"/>
+<rect x="430" y="147" width="303.64" height="29" rx="6" fill="#7697a7"/>
+<text x="1003" y="167" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.5623</text>
+<text x="40" y="224" fill="#263d4d" font-size="17" font-weight="550">CNN · class-weighted</text>
+<rect x="430" y="205" width="540" height="29" rx="6" fill="#e9f1f4"/>
+<rect x="430" y="205" width="326.00" height="29" rx="6" fill="#7697a7"/>
+<text x="1003" y="225" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.6037</text>
+<text x="40" y="282" fill="#263d4d" font-size="17" font-weight="550">CNN · temporal mean pooling</text>
+<rect x="430" y="263" width="540" height="29" rx="6" fill="#e9f1f4"/>
+<rect x="430" y="263" width="332.05" height="29" rx="6" fill="#7697a7"/>
+<text x="1003" y="283" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.6149</text>
+<text x="40" y="340" fill="#263d4d" font-size="17" font-weight="550">CNN + GRU</text>
+<rect x="430" y="321" width="540" height="29" rx="6" fill="#e9f1f4"/>
+<rect x="430" y="321" width="308.61" height="29" rx="6" fill="#7697a7"/>
+<text x="1003" y="341" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.5715</text>
+<text x="40" y="398" fill="#263d4d" font-size="17" font-weight="700">CNN + GRU · class-weighted</text>
+<rect x="430" y="379" width="540" height="29" rx="6" fill="#e9f1f4"/>
+<rect x="430" y="379" width="344.47" height="29" rx="6" fill="#098878"/>
+<text x="1003" y="399" fill="#075f57" font-weight="750" font-size="18" text-anchor="end">0.6379</text></g>
+<line x1="40" y1="478" x2="1030" y2="478" stroke="#dce7eb"/>
+<text x="40" y="496" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#607787">Source: solar-flare-pred / reports / tables · Test average precision (AP)</text>
+</svg>
