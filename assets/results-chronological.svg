@@ -1,29 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="506" viewBox="0 0 1080 506" role="img" aria-labelledby="chart-title chart-desc">
-<title id="chart-title">Chronological holdout: selected model test PR-AUC</title>
-<desc id="chart-desc">Horizontal bars for five selected model configurations. Higher is better. Highest result: 0.4377. Results from the published solar-flare-pred test summary CSV.</desc>
-<rect width="1080" height="506" rx="14" fill="#f5fafb"/>
-<text x="40" y="49" fill="#123747" font-family="Arial,Helvetica,sans-serif" font-weight="750" font-size="26">Chronological holdout — test PR-AUC</text>
-<text x="40" y="83" fill="#546e7b" font-family="Arial,Helvetica,sans-serif" font-size="16">Five selected capstone model configurations · Higher is better · 0–1 scale</text>
-<g font-family="Arial,Helvetica,sans-serif"><line x1="430" y1="122" x2="430" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="430" y="459" text-anchor="middle" fill="#546a77" font-size="14">0</text><line x1="565" y1="122" x2="565" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="565" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.25</text><line x1="700" y1="122" x2="700" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="700" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.5</text><line x1="835" y1="122" x2="835" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="835" y="459" text-anchor="middle" fill="#546a77" font-size="14">0.75</text><line x1="970" y1="122" x2="970" y2="433" stroke="#dbe8eb" stroke-width="1" /><text x="970" y="459" text-anchor="middle" fill="#546a77" font-size="14">1</text><text x="40" y="166" fill="#263d4d" font-size="17" font-weight="550">CNN · last timestep</text>
-<rect x="430" y="147" width="540" height="29" rx="6" fill="#e9f1f4"/>
-<rect x="430" y="147" width="197.48" height="29" rx="6" fill="#7697a7"/>
-<text x="1003" y="167" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.3657</text>
-<text x="40" y="224" fill="#263d4d" font-size="17" font-weight="550">CNN · class-weighted</text>
-<rect x="430" y="205" width="540" height="29" rx="6" fill="#e9f1f4"/>
-<rect x="430" y="205" width="213.89" height="29" rx="6" fill="#7697a7"/>
-<text x="1003" y="225" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.3961</text>
-<text x="40" y="282" fill="#263d4d" font-size="17" font-weight="550">CNN · mean pooling + early stop</text>
-<rect x="430" y="263" width="540" height="29" rx="6" fill="#e9f1f4"/>
-<rect x="430" y="263" width="218.21" height="29" rx="6" fill="#7697a7"/>
-<text x="1003" y="283" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.4041</text>
-<text x="40" y="340" fill="#263d4d" font-size="17" font-weight="550">CNN + GRU</text>
-<rect x="430" y="321" width="540" height="29" rx="6" fill="#e9f1f4"/>
-<rect x="430" y="321" width="225.50" height="29" rx="6" fill="#7697a7"/>
-<text x="1003" y="341" fill="#263d4d" font-weight="600" font-size="18" text-anchor="end">0.4176</text>
-<text x="40" y="398" fill="#263d4d" font-size="17" font-weight="700">CNN + GRU · weighted + early stop</text>
-<rect x="430" y="379" width="540" height="29" rx="6" fill="#e9f1f4"/>
-<rect x="430" y="379" width="236.36" height="29" rx="6" fill="#098878"/>
-<text x="1003" y="399" fill="#075f57" font-weight="750" font-size="18" text-anchor="end">0.4377</text></g>
-<line x1="40" y1="478" x2="1030" y2="478" stroke="#dce7eb"/>
-<text x="40" y="496" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#607787">Source: solar-flare-pred / reports / tables · Test average precision (AP)</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="431" viewBox="0 0 940 431" role="img" aria-labelledby="chart-title chart-desc">
+<title id="chart-title">Chronological holdout — test PR-AUC</title>
+<desc id="chart-desc">Five selected model configurations measured on chronological holdout test data. Higher is better. Best PR-AUC: 0.4377. All bars share an honest zero-to-one horizontal scale.</desc>
+<rect x="0" y="0" width="940" height="431" rx="12" fill="#f5fafb"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="29" y="40" fill="#153747" font-size="26" font-weight="700">Chronological holdout — test PR-AUC</text>
+<text x="29" y="68" fill="#536e7b" font-size="16">Five selected models · Higher is better</text>
+<text x="292" y="101" fill="#536e7b" font-size="14">Test average precision (0–1)</text>
+<line x1="292.00" y1="112" x2="292.00" y2="364" stroke="#d6e2e7" stroke-width="1"/>
+<text x="292.00" y="384" text-anchor="middle" fill="#617a86" font-size="13">0</text>
+<line x1="426.25" y1="112" x2="426.25" y2="364" stroke="#d6e2e7" stroke-width="1"/>
+<text x="426.25" y="384" text-anchor="middle" fill="#617a86" font-size="13">0.25</text>
+<line x1="560.50" y1="112" x2="560.50" y2="364" stroke="#d6e2e7" stroke-width="1"/>
+<text x="560.50" y="384" text-anchor="middle" fill="#617a86" font-size="13">0.50</text>
+<line x1="694.75" y1="112" x2="694.75" y2="364" stroke="#d6e2e7" stroke-width="1"/>
+<text x="694.75" y="384" text-anchor="middle" fill="#617a86" font-size="13">0.75</text>
+<line x1="829.00" y1="112" x2="829.00" y2="364" stroke="#d6e2e7" stroke-width="1"/>
+<text x="829.00" y="384" text-anchor="middle" fill="#617a86" font-size="13">1</text>
+<text x="29" y="146" fill="#203b4a" font-size="17" font-weight="600">CNN · last timestep</text>
+<rect x="292" y="131" width="537" height="19" rx="6" fill="#e8eff2"/>
+<rect x="292" y="131" width="196.38" height="19" rx="6" fill="#7896a5"/>
+<text x="498.38" y="146" fill="#23404e" font-size="16" font-weight="700">0.3657</text>
+<text x="29" y="197" fill="#203b4a" font-size="17" font-weight="600">CNN · class-weighted</text>
+<rect x="292" y="182" width="537" height="19" rx="6" fill="#e8eff2"/>
+<rect x="292" y="182" width="212.71" height="19" rx="6" fill="#7896a5"/>
+<text x="514.71" y="197" fill="#23404e" font-size="16" font-weight="700">0.3961</text>
+<text x="29" y="242" fill="#203b4a" font-size="16.5" font-weight="600">CNN · mean pooling</text>
+<text x="29" y="260" fill="#4b6473" font-size="15">with early stopping</text>
+<rect x="292" y="233" width="537" height="19" rx="6" fill="#e8eff2"/>
+<rect x="292" y="233" width="217.00" height="19" rx="6" fill="#7896a5"/>
+<text x="519.00" y="248" fill="#23404e" font-size="16" font-weight="700">0.4041</text>
+<text x="29" y="299" fill="#203b4a" font-size="17" font-weight="600">CNN + GRU</text>
+<rect x="292" y="284" width="537" height="19" rx="6" fill="#e8eff2"/>
+<rect x="292" y="284" width="224.25" height="19" rx="6" fill="#7896a5"/>
+<text x="526.25" y="299" fill="#23404e" font-size="16" font-weight="700">0.4176</text>
+<text x="29" y="344" fill="#203b4a" font-size="16.5" font-weight="700">CNN + GRU · class-weighted</text>
+<text x="29" y="362" fill="#4b6473" font-size="15">with early stopping</text>
+<rect x="292" y="335" width="537" height="19" rx="6" fill="#e8eff2"/>
+<rect x="292" y="335" width="235.04" height="19" rx="6" fill="#078a78"/>
+<text x="537.04" y="350" fill="#076356" font-size="16" font-weight="700">0.4377</text>
+<line x1="29" y1="403" x2="907" y2="403" stroke="#dce7ea"/>
+<text x="29" y="422" fill="#617987" font-size="12.5">Source: solar-flare-pred · reports/tables/results_summary_chrono.csv · Test-set PR-AUC</text>
+</g></svg>
