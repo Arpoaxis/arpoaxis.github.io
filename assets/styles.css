@@ -12,3 +12,22 @@
 .results-figure figcaption{font-size:.81rem;line-height:1.65;color:#607787;margin-top:9px}
 .results-figure figcaption a{display:inline;color:#0f625c;font-weight:650;text-decoration:underline;text-underline-offset:2px}
 .results-figure a:focus-visible img{outline:3px solid #098878;outline-offset:3px}
+
+/* Source-grounded restaurant system case study */
+.workflow-panel{border:1px solid #d7e5e8;border-radius:11px;background:#f2f8f9;margin:25px 0;padding:3px 22px}
+.workflow-step{display:flex;align-items:flex-start;gap:18px;padding:21px 0;border-bottom:1px solid #d7e5e8}
+.workflow-step:last-child{border-bottom:0}
+.workflow-index{color:#0a8375;font-size:1rem;font-weight:800;letter-spacing:.04em;flex:0 0 25px;margin-top:3px}
+.case-content .workflow-step h3,.case-content .decision-block h3{font-size:1.07rem;letter-spacing:-.015em;margin:0 0 6px;color:#1b3a49}
+.case-content .workflow-step p,.case-content .decision-block p{margin:0;font-size:.91rem;line-height:1.8}
+.schema-panel{border:1px solid #d7e5e8;border-radius:10px;padding:22px;background:#f2f8f9;margin:24px 0 0}
+.schema-group{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.schema-group:last-child{margin-bottom:0}
+.schema-group>div{flex:1;min-width:0;border:1px solid #bcd1d7;border-radius:7px;background:#fff;padding:11px}
+.schema-group strong{display:block;color:#1f4656;font-size:.83rem}
+.schema-group span{display:block;color:#65818d;font-size:.71rem;overflow-wrap:anywhere;margin-top:3px}
+.schema-group>b{font-size:1.05rem;color:#0f8379;flex:0 0 14px;text-align:center}
+.case-content .schema-caption{font-size:.8rem;color:#66808c;margin-top:8px}
+.decision-block{padding:20px 22px;background:#f6f9fa;border-left:3px solid #289a8c;margin:20px 0}
+.case-content code{background:#eaf0f2;border-radius:3px;padding:1px 4px;color:#264854;font-size:.91em;overflow-wrap:anywhere}
+@media(max-width:700px){.workflow-panel{padding:3px 14px}.workflow-step{gap:10px}.schema-panel{padding:12px}.schema-group{gap:5px}.schema-group>div{padding:7px}.schema-group strong{font-size:.73rem}.schema-group span{font-size:.61rem}.schema-group>b{flex-basis:8px;font-size:.85rem}.decision-block{padding:15px}}
