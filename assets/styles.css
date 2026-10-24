@@ -47,15 +47,17 @@
 .case-content .case-gallery-note{font-size:.81rem;line-height:1.7;color:#5f7582;margin:15px 0 24px}
 @media(max-width:650px){.case-screenshot-grid{gap:20px}.case-screenshot figcaption{padding:14px 15px 17px}}
 
-/* Real, source-faithful SDOBenchmark observation sequences */
-.solar-sample-section{margin:42px 0 45px}
-.solar-sample-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;margin:24px 0}
-.solar-sample-figure{margin:0;border:1px solid #d3e2e8;border-radius:12px;background:#fff;overflow:hidden;min-width:0;box-shadow:0 5px 19px rgba(20,55,72,.05)}
-.solar-sample-figure>a:first-child{display:block;line-height:0}
-.solar-sample-figure img{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:initial;margin:0}
-.solar-sample-figure figcaption{border-top:1px solid #dce6eb;padding:15px 19px 18px;color:#486272;font-size:.85rem;line-height:1.75}
+/* Real SDOBenchmark sequences. Keep the gallery inside the text column.
+   Intrinsic 1290px PNG widths must not force the CSS grid wider. */
+.case-study-page .case-layout > .case-content{min-width:0;width:100%;max-width:775px}
+.case-content .solar-sample-section{margin:42px 0 45px;min-width:0;width:100%;max-width:100%}
+.solar-sample-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;margin:24px 0;width:100%;max-width:100%;min-width:0}
+.solar-sample-figure{margin:0;border:1px solid #d3e2e8;border-radius:12px;background:#fff;overflow:hidden;min-width:0;max-width:100%;width:100%;box-shadow:0 5px 19px rgba(20,55,72,.05)}
+.solar-sample-figure>a:first-child{display:block;line-height:0;max-width:100%;overflow:hidden}
+.solar-sample-figure img{display:block;width:100%;max-width:100%;min-width:0;height:auto;max-height:none;object-fit:contain;margin:0}
+.solar-sample-figure figcaption{border-top:1px solid #dce6eb;padding:15px 19px 18px;color:#486272;font-size:.85rem;line-height:1.75;overflow-wrap:anywhere}
 .solar-sample-figure figcaption strong{color:#213f4c}
 .solar-sample-figure figcaption a{color:#08766e;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .solar-sample-figure a:focus-visible{outline:3px solid #098878;outline-offset:-3px}
-.case-content .solar-image-note{border-left:3px solid #94b5c2;background:#f1f7f9;padding:15px 18px;font-size:.84rem;line-height:1.75;color:#4b6471;margin:13px 0 28px}
+.case-content .solar-image-note{border-left:3px solid #94b5c2;background:#f1f7f9;padding:15px 18px;font-size:.84rem;line-height:1.75;color:#4b6471;margin:13px 0 28px;overflow-wrap:anywhere}
 @media(max-width:650px){.solar-sample-gallery{gap:18px}.solar-sample-figure figcaption{padding:13px 15px}}
