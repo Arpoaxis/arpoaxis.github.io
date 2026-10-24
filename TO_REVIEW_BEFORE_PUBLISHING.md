@@ -13,6 +13,7 @@
 
 ## Nice to have
 
+- [ ] Upload verified source-derived solar sample panels `ar-11400-sample.png` and `ar-11401-sample.png` under `assets/solar-samples/` on the PR branch before merging.
 - [ ] Add project diagrams or images from original source material in `assets/`, with permission/credits where needed.
 - [ ] Add an academically accurate Dataproc case study using sanitized architecture and reproducible steps.
 - [ ] Add CubeSat-inspired testbench coverage only after hardware/software has been built and tested (include test records).
