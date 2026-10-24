@@ -31,3 +31,17 @@
 .decision-block{padding:20px 22px;background:#f6f9fa;border-left:3px solid #289a8c;margin:20px 0}
 .case-content code{background:#eaf0f2;border-radius:3px;padding:1px 4px;color:#264854;font-size:.91em;overflow-wrap:anywhere}
 @media(max-width:700px){.workflow-panel{padding:3px 14px}.workflow-step{gap:10px}.schema-panel{padding:12px}.schema-group{gap:5px}.schema-group>div{padding:7px}.schema-group strong{font-size:.73rem}.schema-group span{font-size:.61rem}.schema-group>b{flex-basis:8px;font-size:.85rem}.decision-block{padding:15px}}
+
+/* Real application screenshot gallery — restaurant case study */
+.case-screenshot-section{margin:44px 0 44px}
+.case-screenshot-grid{display:grid;grid-template-columns:1fr;gap:26px;margin:25px 0}
+.case-screenshot{margin:0;border:1px solid #d7e5e8;border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(22,52,70,.05)}
+.case-screenshot>a:first-child{display:block;padding:10px;background:#ecf2f4}
+.case-screenshot img{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;border-radius:6px;margin:0 auto;background:#fff}
+.case-screenshot figcaption{padding:17px 19px 19px;margin:0;font-size:.86rem;line-height:1.75;color:#4b6471}
+.case-screenshot figcaption strong{color:#1b3a49}
+.case-screenshot figcaption a{white-space:nowrap;color:#0c7069;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.case-screenshot a:focus-visible{outline:3px solid #098878;outline-offset:-3px}
+.case-content .case-gallery-note{font-size:.81rem;line-height:1.7;color:#5f7582;margin:15px 0 24px}
+@media(min-width:1140px){.case-screenshot img{max-height:475px}}
+@media(max-width:650px){.case-screenshot figcaption{padding:13px 14px 17px}.case-screenshot>a:first-child{padding:6px}.case-screenshot img{max-height:none}}

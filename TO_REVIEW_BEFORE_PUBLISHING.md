@@ -4,7 +4,7 @@
 
 - [x] Add verified PR-AUC, TSS, and Brier test metrics to the solar case study, with plots generated from the repository's published result CSVs.
 - [ ] Compare portfolio interpretations and any future calibration figures against the final capstone report and original experiment outputs.
-- [ ] Add real screenshots and/or a short recorded demo for the Java restaurant site; distinguish **team contributions** from **your personal work**.
+- [x] Add four real Restaurant Booking screenshots of local demonstration workflows to `assets/screenshots/`, with matching gallery links and captions; fictional records confirmed by project participant.
 - [x] Team permission to publish the restaurant booking project confirmed by project participant.
 - [ ] Audit and sanitize the `bookingtables` public repository's example account and role CSV files (including email/phone/password columns) before promoting the repository link; distinguish demo records from any actual personal data. Review previously published Git history if necessary.
 - [ ] Remove any credentials, private records, or secrets before adding source/screenshot links.
