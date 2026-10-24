@@ -9,6 +9,37 @@
   <div class="workflow-step"><span class="workflow-index">03</span><div><h3>Staff and waitlist operations</h3><p>Staff-facing views display restaurant bookings and waiting guests. Hosts can enter walk-ins, and staff workflows support booking statuses and seating operations.</p></div></div>
   <div class="workflow-step"><span class="workflow-index">04</span><div><h3>Manager reporting</h3><p>Dashboard queries summarize total bookings, daily bookings, distinct customers, and counts by status. The DAO queries can be scoped to an associated restaurant.</p></div></div>
 </div>
+<section class="case-screenshot-section" id="application-screenshots" aria-labelledby="screenshots-heading">
+<h2 id="screenshots-heading">The application in action</h2>
+<p>These are <strong>real screenshots from the locally running Java application</strong>, captured during an October 2026 walkthrough with fictional demonstration records. They show working interfaces rather than design mockups.</p>
+<div class="case-screenshot-grid">
+<figure class="case-screenshot">
+<a href="../assets/screenshots/staff-seated.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size staff dashboard screenshot">
+<img src="../assets/screenshots/staff-seated.png" alt="Staff dashboard: a notified demonstration waitlist entry, confirmed booking updated to seated, and table T9 visibly marked SEATED on the dining-room plan." loading="lazy" width="1115" height="866">
+</a>
+<figcaption><strong>Staff and seating workflow.</strong> A fictional walk-in was added to the waitlist, converted to a booking, assigned to table T9, and marked SEATED. Table status is reflected in the visual plan. <a href="../assets/screenshots/staff-seated.png" target="_blank" rel="noopener noreferrer">Full size ↗</a></figcaption>
+</figure>
+<figure class="case-screenshot">
+<a href="../assets/screenshots/admin-bookings.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size administrator reporting screenshot">
+<img src="../assets/screenshots/admin-bookings.png" alt="Administrator dashboard showing total bookings, bookings today, unique customer count, status summary, and a scrollable historical reservation list." loading="lazy" width="1251" height="746">
+</a>
+<figcaption><strong>Administrator reporting.</strong> SQLite-backed booking counts, status breakdowns, and a scrollable list of historical demonstration reservations. <a href="../assets/screenshots/admin-bookings.png" target="_blank" rel="noopener noreferrer">Full size ↗</a></figcaption>
+</figure>
+<figure class="case-screenshot">
+<a href="../assets/screenshots/employee-management.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size employee management screenshot">
+<img src="../assets/screenshots/employee-management.png" alt="Employee management page with name search, role and status filters, create-employee form, and account management controls using fictional staff records." loading="lazy" width="1173" height="682">
+</a>
+<figcaption><strong>Employee administration.</strong> Search, role/status filtering, employee creation, and account-management controls. The image confirms the interface; it is not a claim that every action was tested in this walkthrough. <a href="../assets/screenshots/employee-management.png" target="_blank" rel="noopener noreferrer">Full size ↗</a></figcaption>
+</figure>
+<figure class="case-screenshot">
+<a href="../assets/screenshots/table-planner.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size table planner screenshot">
+<img src="../assets/screenshots/table-planner.png" alt="Table planner with party size 12, capacity information for restaurant tables, and a suggestion combining tables 6, 7, and 8, each seating up to four guests." loading="lazy" width="884" height="856">
+</a>
+<figcaption><strong>Capacity-based table planner.</strong> The greedy suggestion algorithm recommends tables 6, 7, and 8 for a party of 12. It currently evaluates capacity and combinability, <em>not</em> real-time reservation availability. <a href="../assets/screenshots/table-planner.png" target="_blank" rel="noopener noreferrer">Full size ↗</a></figcaption>
+</figure>
+</div>
+<p class="case-gallery-note">All images show a local academic demonstration, not a publicly deployed reservation service. Records shown were confirmed fictional by the project contributor.</p>
+</section>
 <h2>Architecture</h2>
 <p>The project follows a server-rendered web application structure: JSP pages present the interface; Java servlet handlers receive requests, validate input, and route operations; DAO classes work with SQLite via JDBC. Supporting filters and sessions provide role-aware access to administrative screens.</p>
 <div class="architecture"><div class="architecture-title">REQUEST AND DATA FLOW <small>(BASED ON REPOSITORY STRUCTURE)</small></div><div class="arch-row"><span>Browser<br><small>HTML / CSS / JavaScript</small></span><b>→</b><span>JSP + Servlets<br><small>Request handling</small></span><b>→</b><span>DAO / JDBC<br><small>SQL operations</small></span><b>→</b><span>SQLite<br><small>Application data</small></span></div></div>
@@ -37,13 +68,16 @@
 <li><strong>Reservation workflow refinements:</strong> improved time-slot and table-selection behavior and worked on the database booking-conflict path alongside David.</li>
 </ul>
 <p>The shared booking code is a good example of our collaboration. An early version of the one-hour SQL overlap check appears in a commit by David; my subsequent reservation-workflow commit refined the method so it checks conflicts only when a particular table is selected, alongside updates to reservation time slots and table selection. The commit history establishes these contributions, but does not by itself prove who first designed every aspect of the check.</p>
+<h2>Design scope and future integration</h2>
+<p>The table planner uses a capacity-first greedy approach: it looks for one suitable table, then proposes a combination of eligible tables when necessary. In our local test, a party size of 12 produced tables 6, 7, and 8 (four seats each). The planner does not yet query date/time reservation conflicts, assign a proposed combination to a booking, or enforce physical adjacency. Connecting planning to reservation availability would be a natural next engineering step.</p>
+<p>A separate idea was to support single-seat reservations at the bar. That was planned but <strong>not implemented</strong>; the floor-plan area labeled for bar seating should not be interpreted as a working bar-seat booking feature. Waitlist status and booking status were also managed through separate staff actions in the demonstrated flow.</p>
 <h2>Interesting engineering decisions</h2>
 <div class="decision-block"><h3>Preventing overlapping table bookings</h3><p>Before assigning a specific table, <code>BookingDao.createBookingWithTable</code> queries for bookings whose one-hour occupancy window overlaps the requested period. The method uses <code>setAutoCommit(false)</code>, commits the booking and link together, and rolls back on failure. This keeps the two inserts coordinated. It is a coursework implementation, not a claim of independently verified concurrency safety at production scale.</p></div>
 <div class="decision-block"><h3>Validating dates and time slots</h3><p><code>BookingCreateServlet</code> checks that a booking date is not in the past and, for this project, restricts time selection to 11:30 AM–10:00 PM in 15-minute increments. Failed validation returns users to the form with an explanatory message.</p></div>
 <div class="decision-block"><h3>Role-aware staff interfaces</h3><p>The application distinguishes ADMIN, MANAGER, HOST, and EMPLOYEE roles. An authorization filter controls access to administrative routes, while individual staff servlets also check session and role information. This demonstrates application-level authorization logic, but the project has <strong>not</strong> been presented as a security-audited production service.</p></div>
 <h2>Team project and attribution</h2>
 <p>This was a <strong>five-person software engineering project</strong>. <strong>David Sanchez and I were the primary coding contributors</strong>, with other teammates also contributing. For example, Henry Le added an interactive table-plan implementation that extended the earlier floor-plan work. The architecture and system-wide features remain team accomplishments; the section above highlights contributions supported by my commits and pull requests, rather than claiming sole authorship of every class.</p>
-<p class="editorial-note"><strong>Next improvements:</strong> add approved screenshots of the real floor-plan and staff dashboard interfaces, and finish verifying that all demonstration account records in the public source repository are synthetic and safe to share before linking the repository from this page.</p>
+<p class="editorial-note"><strong>Next improvements:</strong> finish verifying that all demonstration account records in the public source repository are synthetic and safe to share before linking the repository from this page; consider adding a short annotated screen recording of the local reservation workflow.</p>
 <h2>What this demonstrates</h2>
 <ul class="check-list"><li>Full-stack Java web development across presentation, request-handling, and persistence layers</li><li>Relational schema design with join tables and query-backed workflows</li><li>Practical input validation, transaction handling, and role-aware interfaces</li><li>Designing for realistic reservation, waitlist, and restaurant operations</li><li>Collaborating on a substantial multi-module academic application</li></ul>
 <div class="case-bottom"><a href="../index.html#work" class="text-link">← Back to selected work</a><a href="solar-flare.html" class="text-link">Solar Flare Prediction →</a></div>
