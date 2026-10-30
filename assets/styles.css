@@ -61,3 +61,53 @@
 .solar-sample-figure a:focus-visible{outline:3px solid #098878;outline-offset:-3px}
 .case-content .solar-image-note{border-left:3px solid #94b5c2;background:#f1f7f9;padding:15px 18px;font-size:.84rem;line-height:1.75;color:#4b6471;margin:13px 0 28px;overflow-wrap:anywhere}
 @media(max-width:650px){.solar-sample-gallery{gap:18px}.solar-sample-figure figcaption{padding:13px 15px}}
+
+
+/* Cloud Dataproc case study: data flow with an explicit Spark → driver boundary */
+.cloud-pipeline{width:100%;max-width:100%;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:22px;border:1px solid #cfe0e6;border-radius:12px;background:#edf4f6;margin:27px 0 12px}
+.cloud-stage{border:1px solid #b8d5d7;border-radius:9px;background:#fff;padding:14px 18px;text-align:center;min-width:0;overflow-wrap:anywhere}
+.cloud-stage-tag{display:block;color:#14796f;font-size:.65rem;font-weight:800;letter-spacing:.1em;margin-bottom:5px}
+.cloud-stage strong{display:block;font-size:.98rem;color:#1b4050}
+.cloud-stage small{display:block;font-size:.79rem;line-height:1.55;color:#56737d;margin-top:4px}
+.cloud-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cloud-branches .cloud-stage{background:#153547;border-color:#2d6870}
+.cloud-branches .cloud-stage strong{color:#fff}
+.cloud-branches .cloud-stage small{color:#bddee1}
+.cloud-branches .cloud-stage-tag{color:#80e1d0}
+.cloud-arrow{font-size:.83rem;font-weight:800;color:#087c73;text-align:center;padding:4px 0}
+.cloud-stage-driver{background:#e3f5f1;border-color:#79b6aa}
+.confusion-panel{min-width:0;margin:26px 0;border:1px solid #d0e1e4;border-radius:10px;background:#fff;padding:21px;overflow-x:auto}
+.confusion-panel .mini-label{margin-bottom:14px}
+.confusion-table{border-collapse:separate;border-spacing:5px;width:100%;min-width:360px}
+.confusion-table caption{text-align:left;color:#657b87;font-size:.78rem;margin-bottom:11px}
+.confusion-table th{font-size:.79rem;color:#426274;text-align:center;padding:9px 7px}
+.confusion-table tbody th{text-align:left;white-space:nowrap}
+.confusion-table td{width:40%;text-align:center;border-radius:6px;padding:18px 5px 17px}
+.confusion-table td strong{display:block;font-size:1.95rem;line-height:1.2;color:#134f4b}
+.confusion-table td span{display:block;color:#47716e;font-size:.69rem;margin-top:5px}
+.confusion-table td.cm-correct{background:#d7f0e9}
+.confusion-table td.cm-error{background:#f3ebe1}
+.confusion-table td.cm-error strong{color:#765323}
+.confusion-panel .case-gallery-note{margin:14px 0 0}
+
+/* Database relationship diagram: redrawn from the original Workbench schema */
+.db-diagram{min-width:0;max-width:100%;margin:24px 0 12px;padding:21px 17px;background:#eff6f7;border:1px solid #d0e2e6;border-radius:11px}
+.db-relations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.db-entity{min-width:0;background:#fff;border:1px solid #bbd3d9;border-radius:7px;overflow:hidden;box-shadow:0 4px 16px rgba(20,55,72,.035)}
+.db-entity-name{padding:8px 11px;background:#234556;color:#fff;font-size:.88rem;font-weight:760;letter-spacing:.01em}
+.db-entity-fields{font-size:.72rem;color:#3c6070;line-height:1.8;padding:10px;overflow-wrap:anywhere}
+.db-entity-fields b{color:#0e8777;font-size:.69rem}
+.db-connector{text-align:center;color:#13796c;font-size:2.3rem;font-weight:650;line-height:1;padding:10px 0 8px;letter-spacing:1.1em}
+.db-rental{width:min(100%,480px);margin:auto;border-color:#67a79e}
+.db-rental .db-entity-name{background:#126c69}
+.db-rental .db-entity-fields{font-size:.77rem}
+
+/* Compact additional-project preview beneath selected-work cards */
+.additional-project{margin-top:24px;display:grid;grid-template-columns:180px minmax(0,1fr);gap:26px;align-items:center;padding:27px 32px;border:1px solid #d7e3e7;border-radius:13px;background:#eaf2f3}
+.additional-project-label{font-size:.7rem;font-weight:800;letter-spacing:.115em;color:#16796f}
+.additional-project-copy{min-width:0}
+.additional-project h3{font-size:1.38rem;margin:4px 0 7px}
+.additional-project p{font-size:.87rem;line-height:1.7;color:#536b79;margin:0 0 12px}
+.additional-project .chip-row{margin:0 0 12px}
+@media(max-width:700px){.cloud-pipeline{padding:11px}.cloud-stage{padding:12px 9px}.cloud-branches{gap:7px}.cloud-stage strong{font-size:.86rem}.cloud-stage small{font-size:.72rem}.confusion-panel{padding:10px}.db-diagram{padding:11px 8px}.db-relations{gap:5px}.db-entity-name{padding:7px 6px;font-size:.7rem}.db-entity-fields{font-size:.61rem;padding:7px 5px}.db-connector{font-size:1.75rem}.additional-project{grid-template-columns:1fr;gap:8px;padding:22px}}
+@media(max-width:420px){.confusion-table{min-width:300px}.confusion-table th{font-size:.65rem}.confusion-table td strong{font-size:1.55rem}.confusion-table td span{font-size:.61rem}.db-entity-fields{font-size:.58rem}.db-rental .db-entity-fields{font-size:.68rem}}
