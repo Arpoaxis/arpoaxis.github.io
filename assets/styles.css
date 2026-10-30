@@ -142,3 +142,38 @@
 .additional-project{border-left:4px solid #4fbcab}
 @media(max-width:700px){.case-content > h2:not(:first-child){margin-top:36px}.preview-photo-frame{left:16px;right:16px;top:18px}.preview-photo-label{left:23px}.case-content p,.case-content li{line-height:1.8}}
 @media(prefers-reduced-motion:reduce){.project-card,.additional-project,.featured-project{transition:none}.project-card:hover,.additional-project:hover{transform:none}}
+
+/* Implementation-derived portfolio previews.
+   Source imagery: genuine SDOBenchmark image montage and an actual app capture.
+   Cloud and database diagrams are faithful simplified redraws, not screenshots. */
+.solar-source-preview{background:linear-gradient(135deg,#19384a,#101d2c 75%);min-width:0}
+.solar-photo-window{position:absolute;left:23px;right:23px;top:61px;bottom:67px;z-index:1;border:1px solid rgba(181,211,213,.58);border-radius:8px;overflow:hidden;background:#f5f7f7;box-shadow:0 21px 45px rgba(0,0,0,.23)}
+.solar-photo-window img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 53%;max-width:100%}
+.solar-preview-caption{position:absolute;left:25px;right:25px;bottom:22px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.67rem;line-height:1.45;letter-spacing:.075em}
+.solar-preview-caption span{font-weight:800;color:#a9c7ce}
+.solar-preview-caption strong{font-size:.73rem;font-weight:760;color:#b5f2e7;letter-spacing:.03em}
+.cloud-source-preview{background:radial-gradient(circle at 49% 42%,#23535c 0%,#153642 67%,#102b39 100%)}
+.cloud-preview-diagram{position:absolute;inset:46px 25px 36px;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:2px}
+.cloud-preview-input,.cloud-preview-output{min-width:0;border:1px solid #7caaaf;border-radius:6px;background:#173d4a;color:#f0fafa;text-align:center;padding:6px 12px;font-size:.74rem;font-weight:800;letter-spacing:.045em;line-height:1.45}
+.cloud-preview-input span,.cloud-preview-output span{color:#b6d9d6;font-size:.69rem;font-weight:550;letter-spacing:0;margin-left:7px}
+.cloud-preview-output strong{font-size:.73rem}
+.cloud-preview-output{background:#124c55;border-color:#64c8b8}
+.cloud-preview-arrow{text-align:center;color:#89ebd8;font-size:.94rem;font-weight:800;line-height:1.16}
+.cloud-preview-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.cloud-preview-branches>div{min-width:0;border:1px solid #63aaa9;border-radius:6px;background:#285e67;padding:6px 6px 7px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.cloud-preview-branches strong{color:#f3fffd;font-size:.69rem;letter-spacing:.055em;line-height:1.4}
+.cloud-preview-branches small{color:#c5e5e5;font-size:.65rem;line-height:1.35}
+.cloud-preview-caption{position:absolute;z-index:2;left:20px;right:20px;bottom:9px;color:#a8d3d4;font-size:.6rem;letter-spacing:.08em;font-weight:760;text-align:center}
+.additional-project-with-visual{grid-template-columns:minmax(230px,295px) minmax(0,1fr);gap:27px;background:#f0f5f6;border-left:1px solid #d7e3e7}
+.db-preview{min-width:0;background:#163748;border:1px solid #467d81;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:17px 11px 14px;overflow:hidden}
+.db-preview-kicker{align-self:flex-start;color:#a5cece;font-size:.6rem;font-weight:800;letter-spacing:.07em;line-height:1.2;margin:0 0 14px 3px}
+.db-preview-entities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:5px}
+.db-preview-entities span{min-width:0;display:block;text-align:center;border:1px solid #75b6b4;border-radius:4px;background:#244f5e;padding:9px 2px;color:#f3f9f9;font-size:.71rem;font-weight:760;line-height:1.3}
+.db-preview-links{display:block;text-align:center;color:#88ddcb;font-size:1.25rem;line-height:1.5;font-weight:750;letter-spacing:.7em;margin-right:-.7em}
+.db-preview-rental{text-align:center;background:#d6f2ed;border-radius:5px;border:1px solid #9fe2d4;padding:6px 25px 8px}
+.db-preview-rental strong{display:block;color:#115d5b;font-size:.89rem;line-height:1.2}
+.db-preview-rental small{display:block;color:#507b77;font-size:.64rem;margin-top:2px}
+.additional-project-with-visual .additional-project-label{margin:0 0 9px;line-height:1.4;font-size:.66rem;font-weight:830}
+@media(max-width:960px){.additional-project-with-visual{grid-template-columns:minmax(200px,250px) minmax(0,1fr);gap:20px}}
+@media(max-width:700px){.solar-photo-window{left:16px;right:16px;top:54px;bottom:63px}.solar-preview-caption{left:17px;right:17px;bottom:18px;font-size:.61rem}.solar-preview-caption strong{font-size:.65rem}.additional-project-with-visual{grid-template-columns:1fr;gap:16px}.db-preview{padding:15px 12px 12px}.db-preview-kicker{margin-bottom:10px}.cloud-preview-diagram{inset:45px 16px 35px}}
+@media(max-width:390px){.solar-preview-caption{flex-wrap:wrap;row-gap:2px}.cloud-preview-input span{display:block;margin-left:0}.cloud-preview-output span{display:block;margin-left:0}.cloud-preview-diagram{inset:45px 15px 34px;gap:0}}
