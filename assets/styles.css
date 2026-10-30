@@ -231,3 +231,29 @@
   .db-preview-entities span,.db-preview-rental,.db-preview-links{transition:none!important;animation:none!important}
 }
 @media(max-width:390px){.booking-hover-tables span{flex-basis:19px;width:19px;height:19px}.booking-hover-demo{width:160px}}
+
+
+/* NASA SDO cover: one representative M8.1 flare still at rest, with real
+   AIA 131 Å NASA animation only on intentional hover/focus. External NASA
+   GIF (500px, approx 3 MB) is requested only when the hover style matches.
+   Original SDOBenchmark sample montage remains in the detailed case study. */
+.solar-nasa-preview{background:linear-gradient(130deg,#183747,#0b1c2a 80%)}
+.solar-nasa-window{background:#0a1820 url("solar-samples/ar-11401-sample.png") center / cover no-repeat}
+.solar-nasa-window>img{object-position:center center}
+.solar-nasa-window::before{content:"";position:absolute;z-index:2;inset:0;opacity:0;background-repeat:no-repeat;background-position:center 50%;background-size:cover;transition:opacity .28s ease;pointer-events:none}
+.solar-nasa-preview .solar-preview-caption{gap:14px}
+.solar-nasa-preview .solar-preview-caption span{color:#b5dcdd}
+.solar-nasa-preview .solar-preview-caption strong{color:#a8f1e1}
+.featured-copy>p.source-media-credit{font-size:.75rem;line-height:1.65;color:#657785;margin:17px 0 0}
+.source-media-credit a{color:#126b65;text-decoration:underline;text-underline-offset:3px;font-weight:720}
+.source-media-credit a:hover{color:#064c47}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .featured-project:is(:hover,:focus-within) .solar-nasa-window::before{
+    background-image:url("https://svs.gsfc.nasa.gov/vis/a010000/a012700/a012706/Sept_8_M8.gif");
+    opacity:1;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .solar-nasa-window::before{transition:none!important;background-image:none!important}
+}
+@media(max-width:700px){.featured-copy>p.source-media-credit{font-size:.73rem}.solar-nasa-preview .solar-preview-caption{gap:6px}}
