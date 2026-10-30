@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e1724"><meta name="description" content="Case study: a six-person CSC 595 email spam classification workload migrated from Colab to Dataproc Serverless and a single-node cluster, with verified historical Serverless metrics."><title>Google Cloud Dataproc Migration | Gerard McCallion</title><link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/styles.css"><script src="../assets/main.js" defer></script></head>
+<body class="case-study-page"><a class="skip-link" href="#main">Skip to main content</a><header class="site-header"><div class="wrap nav-inner"><a class="brand" href="../index.html"><span class="brand-mark">GM<span class="brand-dot">.</span></span><span>Gerard McCallion</span></a><nav class="primary-nav" aria-label="Main navigation"><a href="../index.html#work">Work</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a></nav><a class="header-github" href="https://github.com/Arpoaxis" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></header>
+<main id="main"><section class="case-hero"><div class="wrap"><a class="back-link" href="../index.html#work">← All projects</a><p class="kicker kicker-light">PROJECT 03 / CLOUD & DATA ENGINEERING</p><h1>Google Cloud<br><em>Dataproc Migration.</em></h1><p class="case-lede">Moving a notebook-based email classifier into managed Google Cloud compute, and learning what it takes to make a Spark and TensorFlow workflow run reliably.</p><div class="case-header-meta"><span>CSC 595 TEAM PROJECT · 2026</span><span>PYSPARK · DATAPROC · TENSORFLOW / KERAS</span></div></div></section>
+<section class="section case-body"><div class="wrap case-layout"><aside class="case-aside"><p class="mini-label">PROJECT AT A GLANCE</p><dl>
+<dt>Role</dt><dd>Hands-on cloud deployment and debugging within a six-person course team</dd>
+<dt>Input</dt><dd>5,171 labeled emails (spam / ham)</dd>
+<dt>Execution</dt><dd>Dataproc Serverless batch and single-node cluster</dd>
+<dt>Data layer</dt><dd>Google Cloud Storage, PySpark, pandas</dd>
+<dt>Model</dt><dd>TensorFlow/Keras embedding + LSTM classifier</dd>
+<dt>Evidence</dt><dd>Archived driver logs, source scripts and class presentation</dd>
+</dl><p class="aside-note">The cloud project was cleaned up after coursework. Figures here are reconstructed from retained results, not screenshots of a currently running deployment.</p></aside>
+<div class="case-content">
+<h2>The engineering problem</h2>
+<p>Our six-person CSC 595 team began with a Google Colab exercise for classifying labeled email messages as spam or ham. The migration objective was to run the data preparation and model workflow on <strong>Google Cloud Dataproc</strong> using two operating models: an on-demand Serverless Spark batch and a self-managed, single-node Dataproc cluster.</p>
+<p>My documented hands-on work concentrated on cloud job configuration, dependency troubleshooting, PySpark-to-Keras workflow adaptation, output persistence and run validation. The project was a <strong>course exercise, not a production spam filtering service</strong>.</p>
+
+<div class="stat-strip" aria-label="Dataset and recorded Serverless evaluation">
+<div><strong>5,171</strong><span>Labeled input emails</span></div>
+<div><strong>605</strong><span>Serverless evaluation rows</span></div>
+<div><strong>0.9628</strong><span>Recorded Serverless F1</span></div></div>
+
+<h2>System architecture</h2>
+<p>Both deployment paths used the same core processing pattern. <strong>PySpark handled CSV ingestion, text cleanup, label normalization and class undersampling.</strong> The balanced records were then collected into the driver process with <code>.toPandas()</code> for scikit-learn splitting and TensorFlow/Keras model training. The neural network was <strong>not trained across distributed Spark workers</strong>.</p>
+<div class="cloud-pipeline" aria-label="Cloud architecture: Google Cloud Storage input feeds either a Dataproc Serverless batch or a single-node cluster. Both perform Spark preprocessing, then collect data to the driver for pandas and Keras training. Results are saved locally and copied to Cloud Storage.">
+<div class="cloud-stage"><span class="cloud-stage-tag">INPUT</span><strong>Cloud Storage</strong><small>Labeled Emails.csv</small></div>
+<div class="cloud-arrow" aria-hidden="true">↓</div>
+<div class="cloud-branches"><div class="cloud-stage"><span class="cloud-stage-tag">PATH A</span><strong>Dataproc Serverless</strong><small>On-demand PySpark batch<br>Custom TensorFlow image</small></div><div class="cloud-stage"><span class="cloud-stage-tag">PATH B</span><strong>Single-node Dataproc</strong><small>Provisioned cluster<br>Pinned Python dependencies</small></div></div>
+<div class="cloud-arrow" aria-hidden="true">↓</div>
+<div class="cloud-stage"><span class="cloud-stage-tag">SPARK DATA PREPARATION</span><strong>Read → clean → undersample → shuffle</strong><small>PySpark DataFrame operations</small></div>
+<div class="cloud-arrow" aria-hidden="true">↓ &nbsp; .toPandas()</div>
+<div class="cloud-stage cloud-stage-driver"><span class="cloud-stage-tag">DRIVER PROCESS</span><strong>Stratified split → Keras tokenization → LSTM → metrics</strong><small>pandas · scikit-learn · TensorFlow/Keras (single-process training)</small></div>
+<div class="cloud-arrow" aria-hidden="true">↓</div>
+<div class="cloud-stage"><span class="cloud-stage-tag">OUTPUT</span><strong>Local files → Hadoop FileSystem → Cloud Storage</strong><small>Metrics CSV · prediction CSVs · saved .keras model</small></div></div>
+<p class="case-gallery-note">The project also produced a numeric-only, <em>BigQuery-compatible</em> predictions CSV. Completed BigQuery imports or SQL queries were not verified.</p>
+
+<h2>Data processing and model</h2>
+<p>The 5,171-row input contained <strong>3,672 ham</strong> and <strong>1,499 spam</strong> messages. Spark parsed quoted and multiline CSV fields, normalized text and labels, removed punctuation and used seeded random undersampling of the majority ham class. Sampling was approximate rather than an exact fixed-size draw.</p>
+<div class="workflow-panel" aria-label="Implementation sequence">
+<div class="workflow-step"><span class="workflow-index">01</span><div><h3>Prepare and balance</h3><p>Filter to valid spam/ham labels, normalize text, sample ham without replacement, and shuffle with a reproducible seed.</p></div></div>
+<div class="workflow-step"><span class="workflow-index">02</span><div><h3>Train in the driver</h3><p>Collect balanced rows to pandas; use a stratified 80/20 split; fit the tokenizer on training text only; pad to 100 tokens. The Keras network used Embedding(32) → LSTM(16) → Dense(32, ReLU) → sigmoid.</p></div></div>
+<div class="workflow-step"><span class="workflow-index">03</span><div><h3>Evaluate and persist</h3><p>Threshold predictions at 0.5, calculate precision/recall/F1 and confusion counts, then save CSV outputs and model weights to Cloud Storage.</p></div></div></div>
+
+<h2>Two deployment approaches</h2>
+<div class="simple-table-wrap"><table><caption>Observed deployment distinctions, not a controlled performance benchmark</caption><thead><tr><th scope="col">Aspect</th><th scope="col">Dataproc Serverless</th><th scope="col">Single-node cluster</th></tr></thead><tbody>
+<tr><th scope="row">Execution model</th><td>Submit batch; Google manages compute lifecycle</td><td>Create cluster, submit PySpark job; manual lifecycle</td></tr>
+<tr><th scope="row">Successful run</th><td>April 20 and May 4, 2026</td><td>April 21, 2026</td></tr>
+<tr><th scope="row">Verified region</th><td>us-east4</td><td>us-central1</td></tr>
+<tr><th scope="row">TensorFlow setup</th><td>Custom container image</td><td>Configured Python dependencies</td></tr>
+<tr><th scope="row">Model-quality metrics</th><td>May 4 run recovered</td><td>Not recovered</td></tr>
+</tbody></table></div>
+<p>Both modes completed a recorded PySpark job. However, the retained runtime observations came from different dates and setups. There is <strong>no supported speed, cloud-cost or model-quality winner</strong> between the two approaches.</p>
+
+<h2 id="results">Recorded Serverless evaluation</h2>
+<p>The archived <strong>May 4, 2026</strong> driver log records a completed Serverless batch with <strong>2,419 training rows</strong>, <strong>605 evaluation rows</strong> and <strong>10 training epochs</strong>. These are historical log values, not measurements from a currently accessible cloud environment.</p>
+<div class="stat-strip" aria-label="May 4 Serverless model classification results">
+<div><strong>96.20%</strong><span>Accuracy</span></div><div><strong>93.42%</strong><span>Precision</span></div><div><strong>99.33%</strong><span>Recall</span></div></div>
+<p><strong>F1: 0.9628.</strong> The four classification metrics are mathematically consistent with the confusion matrix below.</p>
+<div class="confusion-panel"><div><p class="mini-label">RECORDED CONFUSION MATRIX · 605 EVALUATION EMAILS</p><table class="confusion-table"><caption>Rows are actual class; columns are predicted class</caption><thead><tr><th scope="col"></th><th scope="col">Predicted ham</th><th scope="col">Predicted spam</th></tr></thead><tbody><tr><th scope="row">Actual ham</th><td class="cm-correct"><strong>284</strong><span>True negatives</span></td><td class="cm-error"><strong>21</strong><span>False positives</span></td></tr><tr><th scope="row">Actual spam</th><td class="cm-error"><strong>2</strong><span>False negatives</span></td><td class="cm-correct"><strong>298</strong><span>True positives</span></td></tr></tbody></table></div><p class="case-gallery-note">These counts sum to 605. F1 = 2 × 298 / (2 × 298 + 21 + 2) = 0.9628 (rounded). The cloud cluster's corresponding classification metrics were not recovered.</p></div>
+
+<h2>Debugging and engineering decisions</h2>
+<div class="decision-block"><h3>Packaging TensorFlow for Spark jobs</h3><p>An initial Serverless run failed because the standard environment did not contain TensorFlow. The workflow was adjusted to submit a Dataproc batch using a custom TensorFlow-capable container. The cluster deployment separately required explicit dependency configuration.</p></div>
+<div class="decision-block"><h3>Persisting trained models to Cloud Storage</h3><p>Saving a Keras model directly to a <code>gs://</code> location encountered a libcurl/CA-certificate error. We saved the <code>.keras</code> file locally, then used Spark’s Hadoop <code>FileSystem.copyFromLocalFile</code> to transfer it to Cloud Storage. The later Serverless log records successful model and CSV output saves.</p></div>
+<div class="decision-block"><h3>Keeping execution paths distinguishable</h3><p>The cluster comparison script used separate <code>cluster_spam_*</code> artifact names. Original cluster job completion is supported by Dataproc/YARN status; the exact submitted script revision and cluster result CSVs are no longer available for independent verification.</p></div>
+
+<h2>Limitations and lessons</h2>
+<p>The model was trained on the Dataproc driver after <code>.toPandas()</code>, limiting dataset scalability. The class distribution was balanced <em>before</em> splitting, so the evaluation did not reflect natural incoming-email prevalence. The test partition was also reused for Keras validation; this weakens claims of independent generalization, particularly for the cluster variant with early stopping. Duplicate emails were present in the raw corpus, and duplicate-aware partition checking was not recorded.</p>
+<p>The original Colab notebook and cloud versions also differed in preprocessing and training configuration, so comparing their separate accuracy figures would not establish a causal improvement from migration. This project did not verify production serving, BigQuery query execution, cloud cost savings or distributed neural-network training.</p>
+
+<h2>Team contribution and evidence</h2>
+<p>This was a <strong>six-person academic project</strong>. My retained Cloud Shell commands, debugging discussions and scripts support hands-on involvement in Dataproc submission, dependency troubleshooting, Spark/Keras adaptation, GCS artifact transfers and execution-state review. They do not establish sole authorship of the original notebook or every group script.</p>
+<p class="editorial-note"><strong>Source record:</strong> This case study was assembled from the archived CSC 595 presentation, Python scripts and a detailed project handoff auditing historical job logs. The original Cloud resources and execution screenshots are no longer available. Scripts with incomplete revisions and account-specific configuration were intentionally not published as a runnable deployment package.</p>
+<h2>What this demonstrates</h2><ul class="check-list"><li>Deploying PySpark jobs through two Dataproc operating models</li><li>Configuring cloud Python dependencies and troubleshooting execution failures</li><li>Separating distributed data preparation from driver-side model training</li><li>Recovering a usable trained model and metrics through Cloud Storage artifact transfers</li><li>Communicating experimental limitations and provenance of recorded results</li></ul>
+<div class="case-bottom"><a href="../index.html#work" class="text-link">← Back to selected work</a><a href="watersports-database.html" class="text-link">Next: Watersports Database →</a></div>
+</div></div></section></main><footer class="site-footer"><div class="wrap footer-inner"><span>© <span data-year>2026</span> Gerard McCallion</span><a href="../index.html">Back to portfolio</a></div></footer></body></html>
