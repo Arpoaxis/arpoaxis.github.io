@@ -211,7 +211,8 @@
 
   .project-card:is(:hover,:focus-within) .cloud-preview-input{background:#1c5360;border-color:#88e1d4;box-shadow:0 0 14px rgba(105,225,210,.22)}
   .project-card:is(:hover,:focus-within) .cloud-preview-arrow{color:#cffcf0;filter:drop-shadow(0 0 6px #9feee1);transform:scaleY(1.22)}
-  .project-card:is(:hover,:focus-within) .cloud-preview-arrow:first-of-type{transition-delay:.18s}
+  .project-card:is(:hover,:focus-within) .cloud-preview-arrow:nth-child(2){transition-delay:.18s}
+  .project-card:is(:hover,:focus-within) .cloud-preview-arrow:nth-child(4){transition-delay:.54s}
   .project-card:is(:hover,:focus-within) .cloud-preview-branches>div{background:#2c7178;border-color:#9ceadb;box-shadow:0 0 14px rgba(99,207,186,.25)}
   .project-card:is(:hover,:focus-within) .cloud-preview-branches>div:nth-child(1){transition-delay:.28s}
   .project-card:is(:hover,:focus-within) .cloud-preview-branches>div:nth-child(2){transition-delay:.4s}
